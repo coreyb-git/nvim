@@ -1,0 +1,27 @@
+return {
+	"coreyb-git/numpad.nvim",
+	enabled = false,
+	--dev = true,
+	dependencies = {},
+	opts = {
+		TopRow = "uio",
+		MiddleRow = "jkl",
+		BottomRow = "m,.",
+		Zero = " ",
+		Dot = "h",
+		Addition = "a",
+		Subtraction = "s",
+		Multiplication = "d",
+		Division = "f",
+
+		Trigger = "kk",
+		Escape = "q",
+
+		ExtraSpacebar = "g",
+
+		UnbindOnEnter = { "jk" },
+		--BindOnEnter = { { "", "" } },
+		--UnbindOnExit = { "" },
+		BindOnExit = { { "jk", "<ESC>" } },
+	},
+}

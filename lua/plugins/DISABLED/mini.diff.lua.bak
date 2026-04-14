@@ -1,0 +1,51 @@
+local leader_git = Leader_git
+local leader_hunk = "gh"
+
+return {
+	"nvim-mini/mini.diff",
+
+	keys = {
+		{ leader_hunk, "", desc = "Git [H]unk" },
+		{
+			leader_git .. "t",
+			function()
+				MiniDiff.toggle_overlay(0)
+				-- refresh screen so that snacks redraws its gutter.
+				vim.defer_fn(function()
+					vim.cmd("redraw!")
+				end, 500)
+			end,
+			desc = "[T]oggle Git Diff (Mini.Diff)",
+		},
+	},
+
+	init = function()
+		require("mini.diff").setup({
+			view = {
+				style = "sign",
+
+				signs = {
+					--add = "|",
+					--add = "+",
+					--add = "▎", -- Slightly thinner block
+
+					--change = "|",
+					--change = "~",
+					change = "▎",
+
+					--delete = "_",
+					delete = "▂",
+					--delete = "◢",
+					--delete = "", -- A small triangle for deletions
+				},
+			},
+
+			mappings = {
+				apply = leader_hunk .. "a",
+				reset = leader_hunk .. "R",
+
+				textobject = leader_hunk .. "t",
+			},
+		})
+	end,
+}

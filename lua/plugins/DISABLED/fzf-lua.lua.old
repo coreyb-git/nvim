@@ -1,0 +1,13 @@
+local leader = Leader_search .. "f"
+
+return {
+	"ibhagwan/fzf-lua",
+	dependencies = { "nvim-tree/nvim-web-devicons" },
+	cmd = "FzfLua",
+	keys = {
+		{ leader, "", desc = "[F]zf-lua" },
+		{ leader .. "g", "<cmd>FzfLua grep<cr>", desc = "[g]rep" },
+		{ leader .. "G", "<cmd>FzfLua grep resume=true<cr>", desc = "[G]rep (resume)" },
+	},
+	opts = {},
+}

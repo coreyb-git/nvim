@@ -1,0 +1,120 @@
+local leader = Leader_other_writing
+
+local mason_linters = {
+	"shellcheck", -- Linter: Bash
+
+	--CSS
+	-- "stylelint" -- Linter: CSS, Sass, SCSS, LESS
+
+	--HTML
+	"htmlhint", -- Linter: HTML
+
+	-- Lua
+	"stylua",
+	--might need to symlink libbfd-2.42-system.so to 2.38
+	-- sudo ln -s /usr/lib/x86_64-linux-gnu/libbfd-2.42-system.so /usr/lib/x86_64-linux-gnu/libbfd-2.38-system.so
+
+	--Markdown
+	-- "markdownlint", -- Linter, Formatter: Markdown
+
+	"phpcs", -- Linter: PHP. (phpcbf is a formatter using same standards).
+	--"phpstan", -- Linter: PHP
+
+	-- Python
+	-- "pyright",
+
+	-- Ruby
+	"rubocop",
+	"yamllint", -- Linter: YAML
+
+	-- General writing / text
+	--"codespell", -- Linter: Searches for typical typing mistakes
+	--"proselint", -- Linter: Text, Markdown
+	--"textlint", -- Linter: Text, Markdown
+	--"typos",  -- Linter: Source code spell checker
+	-- NOTE: "vale" is required when using "vale_ls" because "vale_ls" doesn't include the actual vale binary.
+	"vale", -- Linter: Text, Markdown, LaTeX (fast, and can do what proselint and write-good does)
+	--"write-good",  -- Linter: Markdown linter for English prose for developers
+}
+
+local text_linters = {
+	--"markdownlint",
+	--"proselint",
+	--"textlint",
+	--"write-good",
+	--"codespell",
+	"vale",
+}
+
+return {
+	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		config = function()
+			local tool = require("mason-tool-installer")
+			tool.setup({ ensure_installed = mason_linters })
+		end,
+	},
+
+	{
+		"mfussenegger/nvim-lint",
+
+		name = "lint",
+
+		--event = { "BufReadPre", "BufNewFile" },
+
+		keys = {
+			{
+				leader .. "R",
+				function()
+					vim.diagnostic.reset(nil, 0)
+				end,
+				desc = "[R]eset diagnostics for current buffer",
+			},
+			{
+				leader .. "l",
+				function()
+					-- Trigger manual text linting
+					require("lint").try_lint(text_linters)
+				end,
+				desc = "Text [l]int manually",
+			},
+		},
+
+		config = function()
+			local lint = require("lint")
+
+			lint.linters_by_ft = {
+				--css = { "stylelint_lsp" },
+				asciidoc = text_linters,
+				--asciidoctor = { "vale" },
+				html = { "htmlhint" },
+				--markdown = { "markdownlint", "vale" },
+				--markdown = { "markdownlint" },
+				--markdown = { "write-good", "textlint" },
+				text = text_linters,
+				--asciidoc = { "codespell", "vale" },
+				--php = { "phpcs", "phpstan" },
+				php = { "phpcs" },
+				python = { "ruff" },
+				ruby = { "rubocop" },
+				sh = { "shellcheck" },
+				yaml = { "yamllint" },
+			}
+
+			local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+			--local events = { "BufEnter", "InsertLeave", "TextChanged" }
+			local events = { "BufReadPost", "BufWritePost" }
+			vim.api.nvim_create_autocmd(events, {
+				group = lint_augroup,
+				callback = function()
+					vim.schedule(function()
+						if vim.opt_local.modifiable:get() then
+							vim.notify("Linting")
+							lint.try_lint()
+						end
+					end)
+				end,
+			})
+		end,
+	},
+}

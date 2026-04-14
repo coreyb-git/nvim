@@ -1,0 +1,17 @@
+local leader = Leader_none .. "L"
+
+return {
+	"kdheepak/lazygit.nvim",
+	lazy = true,
+	cmd = {
+		"LazyGit",
+		"LazyGitConfig",
+		"LazyGitCurrentFile",
+		"LazyGitFilter",
+		"LazyGitFilterCurrentFile",
+	},
+	keys = {
+		{ leader, "", desc = "[L]azyGit" },
+		{ leader .. "g", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+	},
+}
