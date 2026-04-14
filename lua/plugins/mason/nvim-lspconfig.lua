@@ -120,7 +120,7 @@ return {
 		]]
 		--
 
-		local helper = require("plugins.lsp.lsp_helper.lsp_helper")
+		local helper = require("plugins.mason.lsp_helper.lsp_helper")
 		local tool = require("mason-tool-installer")
 		tool.setup({ ensure_installed = helper.get_mason_names() })
 

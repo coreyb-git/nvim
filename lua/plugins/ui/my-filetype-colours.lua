@@ -1,3 +1,20 @@
+local leader_toggle = Leader_ui .. "F"
+
+local enabled = true
+
+local function toggle()
+	enabled = not enabled
+	local s
+	if enabled then
+		s = "enabled"
+	else
+		s = "disabled"
+	end
+	vim.notify("Filetype colours " .. s)
+end
+
+vim.keymap.set("n", leader_toggle, toggle, { desc = "Toggle [F]iletype Colours" })
+
 local buffers_text = { "asciidoc", "markdown", "text", "vimwiki" }
 local buffers_code = { "cs", "json", "lua", "php", "ruby", "sh" }
 
@@ -74,6 +91,10 @@ return {
 				pattern = "*",
 				group = group,
 				callback = function()
+					if not enabled then
+						return
+					end
+
 					local ft = vim.bo.filetype
 
 					if vim.bo.buftype ~= "" then

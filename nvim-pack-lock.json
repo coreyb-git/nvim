@@ -5,7 +5,7 @@
       "src": "https://github.com/stevearc/aerial.nvim"
     },
     "backlinks.nvim": {
-      "rev": "09d525313428b6f8bf2c0c024894af4b972a8775",
+      "rev": "24b30a17eea3414831af8bac94dadef3046cdef4",
       "src": "https://github.com/coreyb-git/backlinks.nvim"
     },
     "codecompanion.nvim": {
