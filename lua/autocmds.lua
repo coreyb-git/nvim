@@ -9,12 +9,6 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 	end,
 })
 
--- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
-
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",
 	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
@@ -47,7 +41,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, { -- perform only once 
 })
 ----
 
--- Use Trouble.nvim instead.
+-- Use tiny-inline-diagnostic instead.
 --[[
 vim.api.nvim_create_autocmd({ "CursorHold" }, {
 	callback = function()
@@ -56,51 +50,6 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, {
 })
 ]]
 --
-
--- diagnostic settings to try to fix lag
-local function disableSettings()
-	vim.schedule(function()
-		--disable lsp_lines, and all diagnostics
-		local m = {
-			virtual_lines = false,
-			signs = false,
-			underline = false,
-			--	update_in_insert = false,
-		}
-		--vim.diagnostic.config(m)
-		--vim.cmd("TSDisable highlight incremental_selection indent textobjects rainbow")
-		--vim.cmd("set nospell")
-		--		vim.cmd("set nolinebreak")
-	end)
-end
-
-local function enableSettings()
-	vim.schedule(function()
-		local m = {
-			virtual_lines = true,
-			signs = true,
-			underline = true,
-			--	update_in_insert = true,
-		}
-		--vim.diagnostic.config(m)
-		--vim.cmd("TSEnable highlight incremental_selection indent textobjects rainbow")
-		--vim.cmd("set spell")
-		--		vim.cmd("set linebreak")
-	end)
-end
---[[
-vim.api.nvim_create_autocmd({ "InsertEnter" }, {
-	pattern = "*",
-	callback = disableSettings,
-})
-
-vim.api.nvim_create_autocmd({ "InsertLeave" }, {
-	pattern = "*",
-	callback = enableSettings,
-})
-]]
---
-----
 
 --restore cursor position on file load
 local api = vim.api
@@ -135,7 +84,7 @@ local function update_winbars()
 		end
 	else
 		-- HIDE winbar when only one window is open
-		for _, win in ipairs(real_wins) do
+		for _, win in ipairs(real_wins) do -- loop in case of zero items in list
 			vim.wo[win].winbar = nil
 		end
 	end

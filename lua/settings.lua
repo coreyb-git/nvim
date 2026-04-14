@@ -68,14 +68,14 @@ vim.opt.confirm = true
 
 --
 
-vim.opt.lazyredraw = true
+--vim.opt.lazyredraw = true
 
 vim.cmd("set nomodeline")
 
 vim.o.showcmd = false
-vim.o.wrapscan = false
-vim.o.foldcolumn = "0" -- rainbow indents is easier to see --"auto:9"
-vim.o.foldlevel = 99 -- Using ufo provider needs a large value
+vim.o.wrapscan = false -- continue searching from start after reaching EOF
+vim.o.foldcolumn = "0"
+vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.opt.fillchars = [[eob:█,fold: ,foldopen:┌,foldsep:│,foldclose:]]
@@ -85,8 +85,8 @@ vim.opt.fillchars = [[eob:█,fold: ,foldopen:┌,foldsep:│,foldclose:]]
 --jtcqln
 --
 
-vim.o.signcolumn = "yes:1" -- I override this when using snacks statuscolumn
-vim.o.statuscolumn = " %=%l %s%C│ "
+vim.o.signcolumn = "yes:1" -- I override this when using custom statuscolumn
+vim.o.statuscolumn = " %=%l %s%C│ " -- default simple statuscolumn before overriding with plugin
 
 vim.o.winborder = "rounded"
 
@@ -133,7 +133,7 @@ vim.diagnostic.config({
 
 	virtual_text = {
 		-- current_line is a filter.  Leave alone to have it always show on all lines.
-		--current_line = false,
+		-- current_line = false,
 		source = "if_many",
 		spacing = 2,
 		format = function(diagnostic)
