@@ -159,6 +159,8 @@ function M.load_lazy_spec(spec)
 		end
 	end
 
+	-- This is wrong, so just ignore it and load like normal instead of lazy loading.
+	--[[
 	if spec.cmd then
 		is_lazy = true
 		local cmd_type = type(spec.cmd)
@@ -170,6 +172,8 @@ function M.load_lazy_spec(spec)
 			setup_autocmd("User", spec.cmd, setup_func)
 		end
 	end
+  ]]
+	--
 
 	if spec.ft then
 		is_lazy = true

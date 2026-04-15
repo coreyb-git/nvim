@@ -1,3 +1,5 @@
+-- Formatter
+
 local mason_formatters = {
 	-- Bash
 	"shfmt", --Formatter: Bash, Mksh, Shell
