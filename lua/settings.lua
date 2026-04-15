@@ -97,7 +97,7 @@ vim.cmd("set smartindent")
 vim.cmd("set smoothscroll")
 
 vim.o.tabstop = 2
-vim.o.shiftwidth = 0 -- 0 = use tabstop amount
+vim.o.shiftwidth = 0    -- 0 = use tabstop amount
 vim.o.expandtab = false -- don't covert tabs to spaces
 
 --hide tab chars

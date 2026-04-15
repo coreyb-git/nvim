@@ -50,7 +50,6 @@ migrate.set_dev_path("/home/nub/Documents/dev/nvim_plugins/")
 
 migrate.lazy_import("plugins")
 migrate.lazy_import("plugins/dev")
-migrate.lazy_import("plugins/formatting")
 migrate.lazy_import("plugins/mason")
 migrate.lazy_import("plugins/other")
 migrate.lazy_import("plugins/popups")

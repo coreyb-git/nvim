@@ -21,9 +21,7 @@ require("lazy").setup({
 	--  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
 	{ import = "plugins" },
 	{ import = "plugins/dev" },
-	{ import = "plugins/formatting" },
-	{ import = "plugins/lsp" },
-	{ import = "plugins/lsp/lsp_configs" },
+	{ import = "plugins/mason" },
 	{ import = "plugins/other" },
 	{ import = "plugins/popups" },
 	{ import = "plugins/ui" },

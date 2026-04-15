@@ -1,13 +1,11 @@
-local leader = "gr" -- normal mode binds
+local leader = "gr"                    -- normal mode binds
 local leader_toggle = Leader_ui .. "l" -- /UI/LSP/
 local leader_toggle_inlay = leader_toggle .. "H"
 local leader_toggle_diagnostics = leader_toggle .. "D"
 
 return {
 	"neovim/nvim-lspconfig",
-	dependencies = {
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-	},
+
 	config = function()
 		-- Bind LspInfo and LspLog commands
 		vim.api.nvim_create_user_command("LspInfo", function()
@@ -80,12 +78,12 @@ return {
 				-- When you move your cursor, the highlights will be cleared (the second autocommand).
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
 				if
-					client
-					and client_supports_method(
-						client,
-						vim.lsp.protocol.Methods.textDocument_documentHighlight,
-						event.buf
-					)
+						client
+						and client_supports_method(
+							client,
+							vim.lsp.protocol.Methods.textDocument_documentHighlight,
+							event.buf
+						)
 				then
 					local highlight_augroup = vim.api.nvim_create_augroup("lspconfig-lsp-highlight", { clear = false })
 					vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -120,10 +118,7 @@ return {
 		]]
 		--
 
-		local helper = require("plugins.mason.lsp_helper.lsp_helper")
-		local tool = require("mason-tool-installer")
-		tool.setup({ ensure_installed = helper.get_mason_names() })
-
+		local helper = require("plugins.mason.mason_helper.helper")
 		local lsp_names = helper.get_lsp_names()
 		-- Enable servers
 		for _, server in ipairs(lsp_names) do

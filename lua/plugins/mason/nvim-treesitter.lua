@@ -1,14 +1,8 @@
 return {
-	{
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		config = function()
-			local tool = require("mason-tool-installer")
-			tool.setup({ ensure_installed = { "tree-sitter-cli" } })
-		end,
-	},
-
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
+
+		dependencies = "WhoIsSethDaniel/mason-tool-installer.nvim",
 
 		lazy = false,
 		branch = "main",

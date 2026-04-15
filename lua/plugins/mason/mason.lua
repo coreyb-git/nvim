@@ -5,7 +5,12 @@ vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
 
 return {
 	"mason-org/mason.nvim",
-	opts = {},
+	opts = {
+		registries = {
+			"github:mason-org/mason-registry",
+			"github:Crashdummyy/mason-registry", -- enables Roslyn C# LSP
+		},
+	},
 	keys = {
 		{ leader, "<cmd>Mason<cr>", desc = "[M]ason" },
 	},

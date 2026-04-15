@@ -1,42 +1,5 @@
 local leader = Leader_other_writing
 
-local mason_linters = {
-	"shellcheck", -- Linter: Bash
-
-	--CSS
-	-- "stylelint" -- Linter: CSS, Sass, SCSS, LESS
-
-	--HTML
-	"htmlhint", -- Linter: HTML
-
-	-- Lua
-	"stylua",
-	--might need to symlink libbfd-2.42-system.so to 2.38
-	-- sudo ln -s /usr/lib/x86_64-linux-gnu/libbfd-2.42-system.so /usr/lib/x86_64-linux-gnu/libbfd-2.38-system.so
-
-	--Markdown
-	-- "markdownlint", -- Linter, Formatter: Markdown
-
-	"phpcs", -- Linter: PHP. (phpcbf is a formatter using same standards).
-	--"phpstan", -- Linter: PHP
-
-	-- Python
-	-- "pyright",
-
-	-- Ruby
-	"rubocop",
-	"yamllint", -- Linter: YAML
-
-	-- General writing / text
-	--"codespell", -- Linter: Searches for typical typing mistakes
-	--"proselint", -- Linter: Text, Markdown
-	--"textlint", -- Linter: Text, Markdown
-	--"typos",  -- Linter: Source code spell checker
-	-- NOTE: "vale" is required when using "vale_ls" because "vale_ls" doesn't include the actual vale binary.
-	"vale", -- Linter: Text, Markdown, LaTeX (fast, and can do what proselint and write-good does)
-	--"write-good",  -- Linter: Markdown linter for English prose for developers
-}
-
 local text_linters = {
 	--"markdownlint",
 	--"proselint",
@@ -48,17 +11,11 @@ local text_linters = {
 
 return {
 	{
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		config = function()
-			local tool = require("mason-tool-installer")
-			tool.setup({ ensure_installed = mason_linters })
-		end,
-	},
-
-	{
 		"mfussenegger/nvim-lint",
 
 		name = "lint",
+
+		dependencies = "WhoIsSethDaniel/mason-tool-installer.nvim",
 
 		--event = { "BufReadPre", "BufNewFile" },
 
