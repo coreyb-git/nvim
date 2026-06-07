@@ -38,6 +38,7 @@ return {
 			python = { "ruff" },
 			ruby = { "rubocop" },
 			sh = { "shfmt" },
+			toml = { "taplo" },
 			yaml = { "yamlfmt" },
 		},
 

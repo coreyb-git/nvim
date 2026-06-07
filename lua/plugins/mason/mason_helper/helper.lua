@@ -25,6 +25,9 @@ local formatters = {
 	-- Ruby
 	"rubocop",
 	"yamlfmt", -- Formatter: YAML (by Google)
+
+	-- TOML
+	"taplo",
 }
 
 local linters = {
@@ -122,6 +125,9 @@ local function setup_lsp_arrays()
 
 	-- Rust
 	--"rust_analyzer", -- LSP: Rust
+
+	-- TOML
+	use_lsp("taplo")
 
 	-- TypeScript / JavaScript
 	use_lsp("typescript-language-server", "ts_ls")
