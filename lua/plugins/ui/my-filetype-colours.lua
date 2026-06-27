@@ -58,9 +58,6 @@ local function set_colours(scheme)
 	end
 end
 
--- init colours
-set_colours(scheme_default)
-
 local function contains(tbl, val)
 	for _, value in ipairs(tbl) do
 		if value == val then
@@ -103,6 +100,10 @@ return {
 	{
 		"yorickpeterse/vim-paper",
 		--		enabled = false,
+		init = function()
+			-- init colours
+			set_colours(scheme_default)
+		end,
 	},
 
 	-- Writing

@@ -1,6 +1,6 @@
 return {
 	"coreyb-git/spd-say.nvim",
-	dev = true,
+	-- dev = true,
 	opts = {
 		enabled = false,
 		--	  speak_on_cursormoved = false,
